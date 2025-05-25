@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полина Мигранова | Графический дизайнер</title>
+    <meta name="description" content="Портфолио графического дизайнера Полины Миграновой">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Предзагрузка шрифтов -->
+    <link rel="preload" href="/assets/fonts/MV-SKIFER.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="/assets/fonts/Onest-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <!-- Предзагрузка критических изображений -->
+    <link rel="preload" href="/assets/images/logo.svg" as="image">
+</head>
+<body>
+    <!-- Прелоадер -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-spinner"></div>
+            <div class="preloader-text">ЗАГРУЗКА</div>
+        </div>
+    </div>
+    <!-- Хедер -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/assets/images/logo.svg" alt="Логотип Полина Мигранова">
+                </div>
+                <div class="header-text">
+                    <div class="header-row">
+                        <h1 class="header-name">Полина</h1>
+                        <div class="header-subtitle">
+                            графический<br>дизайнер
+                        </div>
+                    </div>
+                    <h1 class="header-surname">Мигранова</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Секция портфолио -->
+        <section class="portfolio">
+            <div class="container">
+                <div class="portfolio-header">
+                    <div class="rings-decoration">
+                        <img src="/assets/images/rings_with_circle.svg" alt="">
+                    </div>
+                    <h2 class="section-title">Портфолио</h2>
+                </div>
+                
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <!-- Карточки будут добавлены через JS -->
+                </div>
+            </div>
+        </section>
+        
+        <div class="placeholder">
+            <p>✓ Этап 2: Базовая структура готова</p>
+        </div>
+    </main>
+    
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-decoration">
+            <img src="/assets/images/koltsa_fon1.svg" alt="">
+        </div>
+        <div class="container">
+            <a href="https://t.me/Migranovap" 
+               target="_blank" 
+               rel="noreferrer"
+               class="contact-button">
+                связаться
+            </a>
+        </div>
+    </footer>
+    
+    <!-- Модальное окно проекта -->
+    <div id="project-modal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            
+            <div class="modal-header">
+                <h3 id="modal-title" class="modal-title"></h3>
+                <h4 id="modal-description" class="modal-subtitle"></h4>
+                <p id="modal-audience" class="modal-audience"></p>
+            </div>
+            
+            <div class="slider">
+                <div class="slider-viewport">
+                    <div id="slider-container" class="slider-container">
+                        <!-- Слайды будут добавлены через JS -->
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn slider-prev" onclick="prevSlide()">←</button>
+                    <button class="slider-btn slider-next" onclick="nextSlide()">→</button>
+                </div>
+                
+                <div id="slide-info" class="slide-info">
+                    <!-- Информация о слайде -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

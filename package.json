@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-html",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "python3 -m http.server 8000 || python -m SimpleHTTPServer 8000",
+    "dev": "live-server --port=8000"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
