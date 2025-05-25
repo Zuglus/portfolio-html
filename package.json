@@ -1,11 +1,96 @@
 {
-  "name": "portfolio-html",
-  "version": "1.0.0",
+  "name": "portfolio-polina-migranova",
+  "version": "2.0.0",
+  "description": "Современное портфолио графического дизайнера Полины Миграновой",
+  "keywords": [
+    "portfolio",
+    "graphic-design",
+    "web-design",
+    "static-site",
+    "modern-css",
+    "responsive"
+  ],
+  "author": {
+    "name": "Полина Мигранова",
+    "url": "https://t.me/Migranovap"
+  },
+  "license": "MIT",
+  "homepage": ".",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
   "scripts": {
-    "start": "python3 -m http.server 8000 || python -m SimpleHTTPServer 8000",
-    "dev": "live-server --port=8000"
+    "start": "npm run dev",
+    "dev": "live-server --port=3000 --host=localhost --open=/",
+    "dev:secure": "live-server --port=3000 --host=localhost --https --open=/",
+    "build": "npm run optimize && npm run validate",
+    "preview": "live-server dist --port=3001 --host=localhost --open=/",
+    "test": "npm run validate && npm run lighthouse",
+    "validate": "npm run validate:html && npm run validate:css && npm run validate:accessibility",
+    "validate:html": "html-validate *.html",
+    "validate:css": "stylelint **/*.css --fix",
+    "validate:accessibility": "pa11y http://localhost:3000",
+    "optimize": "npm run optimize:images && npm run optimize:css && npm run optimize:js",
+    "optimize:images": "imagemin assets/images/**/* --out-dir=dist/assets/images",
+    "optimize:css": "cleancss -o dist/styles.min.css styles.css",
+    "optimize:js": "terser script.js -o dist/script.min.js --compress --mangle",
+    "lighthouse": "lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html",
+    "format": "prettier --write **/*.{html,css,js,json,md}",
+    "lint": "npm run lint:css && npm run lint:js",
+    "lint:css": "stylelint **/*.css",
+    "lint:js": "eslint **/*.js",
+    "serve:production": "http-server dist -p 8080 -c-1",
+    "analyze": "npm run lighthouse && npm run validate",
+    "clean": "rimraf dist lighthouse-report.html",
+    "prebuild": "npm run clean",
+    "postbuild": "echo 'Build completed successfully! ✨'",
+    "check:performance": "lighthouse http://localhost:3000 --only-categories=performance",
+    "check:accessibility": "lighthouse http://localhost:3000 --only-categories=accessibility",
+    "check:seo": "lighthouse http://localhost:3000 --only-categories=seo",
+    "deploy:prepare": "npm run build && npm run test"
   },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "@html-validate/stylish": "^4.0.0",
+    "clean-css-cli": "^5.6.3",
+    "eslint": "^8.57.1",
+    "html-validate": "^8.24.1",
+    "http-server": "^14.1.1",
+    "imagemin": "^8.0.1",
+    "imagemin-cli": "^8.0.0",
+    "lighthouse": "^12.0.0",
+    "live-server": "^1.2.2",
+    "pa11y": "^8.0.0",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "stylelint": "^16.10.0",
+    "stylelint-config-standard": "^36.0.1",
+    "terser": "^5.36.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "type": "module",
+  "main": "index.html",
+  "files": [
+    "index.html",
+    "styles.css",
+    "script.js",
+    "assets/**/*",
+    "README.md"
+  ],
+  "config": {
+    "port": 3000,
+    "host": "localhost"
+  },
+  "overrides": {
+    "caniuse-lite": "^1.0.30001718"
   }
 }

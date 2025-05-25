@@ -4,88 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Полина Мигранова | Графический дизайнер</title>
-    <meta name="description" content="Портфолио графического дизайнера Полины Миграновой">
+    <meta name="description" content="Портфолио графического дизайнера Полины Миграновой. Брендинг, айдентика, дизайн презентаций.">
+    <meta name="keywords" content="графический дизайн, брендинг, айдентика, презентации, Полина Мигранова">
+    <meta name="author" content="Полина Мигранова">
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Полина Мигранова | Графический дизайнер">
+    <meta property="og:description" content="Портфолио графического дизайнера Полины Миграновой">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/images/og-image.jpg">
+    
+    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Предзагрузка шрифтов -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    
+    <!-- Preload критических ресурсов -->
     <link rel="preload" href="/assets/fonts/MV-SKIFER.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="/assets/fonts/Onest-Regular.ttf" as="font" type="font/ttf" crossorigin>
-    
-    <!-- Предзагрузка критических изображений -->
     <link rel="preload" href="/assets/images/logo.svg" as="image">
+    
+    <style>
+        /* Критический CSS для быстрой загрузки */
+        :root {
+            --color-primary: #04061B;
+            --color-secondary: #3624A6;
+            --color-white: #FFFFFF;
+            --font-primary: 'Onest', sans-serif;
+            --font-display: 'MV-SKIFER', sans-serif;
+            --container-max: 75rem;
+            
+            /* Modern Motion System */
+            --motion-duration-short: 150ms;
+            --motion-duration-medium: 300ms;
+            --motion-duration-long: 500ms;
+            --motion-easing-standard: cubic-bezier(0.2, 0.0, 0, 1);
+            --motion-easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+        }
+        
+        /* Базовые стили и сброс */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Шрифты с font-display: swap для производительности */
+        @font-face {
+            font-family: 'MV-SKIFER';
+            src: url('/assets/fonts/MV-SKIFER.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Onest';
+            src: url('/assets/fonts/Onest-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* Прелоадер */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--color-primary);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity var(--motion-duration-long) var(--motion-easing-standard);
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Utility для reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Прелоадер -->
-    <div id="preloader" class="preloader">
+    <div class="preloader" id="preloader">
         <div class="preloader-content">
-            <div class="preloader-spinner"></div>
+            <div class="spinner-container">
+                <svg class="spinner" viewBox="0 0 100 100" width="100" height="100">
+                    <!-- Статичные круги -->
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" 
+                            stroke-width="2" class="spinner-bg" opacity="0.2"/>
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" 
+                            stroke-width="2" class="spinner-bg" opacity="0.15"/>
+                    
+                    <!-- Анимированный круг -->
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-dasharray="30 10" class="spinner-animate"/>
+                </svg>
+            </div>
             <div class="preloader-text">ЗАГРУЗКА</div>
         </div>
     </div>
-    <!-- Хедер -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="/assets/images/logo.svg" alt="Логотип Полина Мигранова">
-                </div>
-                <div class="header-text">
-                    <div class="header-row">
-                        <h1 class="header-name">Полина</h1>
-                        <div class="header-subtitle">
-                            графический<br>дизайнер
-                        </div>
+
+    <!-- Основной контент -->
+    <main id="main-content">
+        <!-- Хедер -->
+        <header class="header" role="banner">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo-container">
+                        <img src="/assets/images/logo.svg" 
+                             alt="Логотип Полина Мигранова" 
+                             class="logo"
+                             width="192"
+                             height="192">
                     </div>
-                    <h1 class="header-surname">Мигранова</h1>
+                    
+                    <div class="header-text">
+                        <div class="header-row">
+                            <h1 class="header-name">Полина</h1>
+                            <div class="header-subtitle">
+                                графический<br>дизайнер
+                            </div>
+                        </div>
+                        <h1 class="header-surname">Мигранова</h1>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-    
-    <main>
+        </header>
+
         <!-- Секция портфолио -->
-        <section class="portfolio">
+        <section class="portfolio" role="main" aria-labelledby="portfolio-title">
             <div class="container">
                 <div class="portfolio-header">
-                    <div class="rings-decoration">
-                        <img src="/assets/images/rings_with_circle.svg" alt="">
+                    <div class="rings-decoration" aria-hidden="true">
+                        <img src="/assets/images/rings_with_circle.svg" alt="" role="presentation">
                     </div>
-                    <h2 class="section-title">Портфолио</h2>
+                    <h2 id="portfolio-title" class="section-title">Портфолио</h2>
                 </div>
                 
-                <div class="portfolio-grid" id="portfolio-grid">
+                <div class="portfolio-grid" id="portfolio-grid" role="grid">
                     <!-- Карточки будут добавлены через JS -->
                 </div>
             </div>
         </section>
-        
-        <div class="placeholder">
-            <p>✓ Этап 2: Базовая структура готова</p>
-        </div>
     </main>
-    
+
     <!-- Футер -->
-    <footer class="footer">
-        <div class="footer-decoration">
-            <img src="/assets/images/koltsa_fon1.svg" alt="">
+    <footer class="footer" role="contentinfo">
+        <div class="footer-decoration" aria-hidden="true">
+            <img src="/assets/images/koltsa_fon1.svg" alt="" role="presentation">
         </div>
         <div class="container">
             <a href="https://t.me/Migranovap" 
                target="_blank" 
-               rel="noreferrer"
-               class="contact-button">
+               rel="noopener noreferrer"
+               class="contact-button"
+               aria-label="Связаться со мной в Telegram">
                 связаться
             </a>
         </div>
     </footer>
-    
+
     <!-- Модальное окно проекта -->
-    <div id="project-modal" class="modal">
-        <div class="modal-backdrop"></div>
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    <div id="project-modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-content" role="document">
+            <button class="modal-close" aria-label="Закрыть модальное окно">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                     stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                          stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
             
@@ -95,25 +206,467 @@
                 <p id="modal-audience" class="modal-audience"></p>
             </div>
             
-            <div class="slider">
+            <div class="slider" role="region" aria-label="Слайдер изображений проекта">
                 <div class="slider-viewport">
                     <div id="slider-container" class="slider-container">
                         <!-- Слайды будут добавлены через JS -->
                     </div>
                 </div>
                 
-                <div class="slider-controls">
-                    <button class="slider-btn slider-prev" onclick="prevSlide()">←</button>
-                    <button class="slider-btn slider-next" onclick="nextSlide()">→</button>
+                <div class="slider-controls" role="group" aria-label="Навигация по слайдам">
+                    <button class="slider-btn slider-prev" 
+                            aria-label="Предыдущий слайд"
+                            disabled>←</button>
+                    <button class="slider-btn slider-next" 
+                            aria-label="Следующий слайд">→</button>
                 </div>
                 
-                <div id="slide-info" class="slide-info">
+                <div id="slide-info" class="slide-info" role="region" aria-live="polite">
                     <!-- Информация о слайде -->
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Загружаем CSS асинхронно после критических стилей -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     
-    <script src="script.js"></script>
+    <!-- Скрипт должен быть в конце для оптимизации -->
+    <script>
+        // Современная версия JavaScript с ES6+
+        class PortfolioApp {
+            constructor() {
+                this.currentProject = null;
+                this.currentSlide = 0;
+                this.isModalOpen = false;
+                this.isTransitioning = false;
+                
+                this.portfolioData = [
+                    {
+                        "id": "project1",
+                        "image": "/assets/images/threads.png",
+                        "alt": "НИТИ"
+                    },
+                    {
+                        "id": "project2", 
+                        "image": "/assets/images/code.png",
+                        "alt": "КОДИИМ"
+                    },
+                    {
+                        "id": "project3",
+                        "image": "/assets/images/day.png", 
+                        "alt": "День физики"
+                    },
+                    {
+                        "id": "project4",
+                        "image": "/assets/images/presentation.png",
+                        "alt": "Дизайн презентаций"
+                    }
+                ];
+
+                this.projectsData = [
+                    {
+                        "id": "project1",
+                        "title": "НИТИ",
+                        "description": "Кластер проектов по управлению современным образованием",
+                        "audience": "менеджеры образования, управленцы, преимущественно женщины старше 40",
+                        "slides": [
+                            {
+                                "image": "/assets/images/niti/niti1.png",
+                                "task": "ребрендинг образовательного продукта, создание айдентики, гармонично сочетающей эстетику с глубоким смысловым содержанием. Основной акцент на женственность, лидерство и стремление к профессиональному росту",
+                                "solution": "цветовая палитра создает ощущение серьезного подхода к вызовам современного образования. Возраст целевой аудитории определяет использование цветов с более короткой длиной волны (выбран синий, использовался и ранее, но изменены оттенки и градиенты). Новые элементы айдентики подчеркивают глубину образовательного материала"
+                            },
+                            {
+                                "image": "/assets/images/niti/niti2.png",
+                                "task": "ребрендинг образовательного продукта, создание айдентики, гармонично сочетающей эстетику с глубоким смысловым содержанием. Основной акцент на женственность, лидерство и стремление к профессиональному росту",
+                                "solution": "цветовая палитра создает ощущение серьезного подхода к вызовам современного образования. Возраст целевой аудитории определяет использование цветов с более короткой длиной волны (выбран синий, использовался и ранее, но изменены оттенки и градиенты). Новые элементы айдентики подчеркивают глубину образовательного материала"
+                            },
+                            {
+                                "image": "/assets/images/niti/niti3.png",
+                                "task": "разработка мерча для мероприятия",
+                                "solution": "цветовая палитра создает ощущение серьезного подхода к вызовам современного образования. Возраст целевой аудитории определяет использование цветов с более короткой длиной волны (выбран синий, использовался и ранее, но изменены оттенки и градиенты). Новые элементы айдентики подчеркивают глубину образовательного материала"
+                            },
+                            {
+                                "image": "/assets/images/niti/niti4.png",
+                                "task": "создание smm-материалов (карточек)",
+                                "solution": "разработка основных элементов фирменного стиля (сохранение общих моментов и введение разнообразия для привлечения внимания), расстановка акцентов для выделения существенной информации"
+                            },
+                            {
+                                "image": "/assets/images/niti/niti5.png",
+                                "task": "создание smm-материалов (карточек)",
+                                "solution": "разработка основных элементов фирменного стиля (сохранение общих моментов и введение разнообразия для привлечения внимания), расстановка акцентов для выделения существенной информации"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "project2",
+                        "title": "КОДИИМ",
+                        "description": "Проект по искусственному интеллекту, обучению программированию и созданию нейронных сетей",
+                        "audience": "учащиеся 6-11 классов, интересующиеся программированием и ИИ",
+                        "slides": [
+                            {
+                                "image": "/assets/images/code/code1.png",
+                                "task": "оформление ивента — Московского городского конкурса для школьников в области ИИ (мерча для подарков победителям и призерам)",
+                                "solution": "современная подача, цветовые отличия в бейджах, палитра отражает технологичность бренда"
+                            },
+                            {
+                                "image": "/assets/images/code/code2.png",
+                                "task": "создать уникальный и запоминающийся мерч для буткемпа по ИИ",
+                                "solution": "в разработке мерча реализован уникальный подход: смыслы мероприятия представлены как код в программировании"
+                            },
+                            {
+                                "image": "/assets/images/code/code3.png",
+                                "task": "редизайн smm-материалов",
+                                "solution": "разнообразие цветов, активное использование нейросетей для генерации иллюстраций и персонажей"
+                            },
+                            {
+                                "image": "/assets/images/code/code4.png",
+                                "task": "редизайн smm-материалов",
+                                "solution": "разнообразие цветов, активное использование нейросетей для генерации иллюстраций и персонажей"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "project3",
+                        "title": "День физики",
+                        "description": "Мероприятие состоялось 17 сентября 2023 года в день рождения Циолковского на базе вузов в 22 городах страны",
+                        "audience": "старшеклассники, интересующиеся наукой, выбирают будущую профессию",
+                        "slides": [
+                            {
+                                "image": "/assets/images/fizics/fizics1.png",
+                                "task": "разработать карточки для игры «Технообмен» в айдентике бренда, но с указанными новыми цветами. Участники получали карточки в обмен на выполнение заданий",
+                                "solution": "изучить биографии российских и советских учёных. Было важно показать, что теоретические открытия не самоцель, наука призвана решать конкретные практические задачи. Так родилась идея написать тексты об открытиях на обороте и добавлять надпись «НАУКА=ТЕОРИЯ+ПРАКТИКА». Цитаты учёных были подобраны для трансляции ценностей об отношении к профессии, труду и обществу"
+                            },
+                            {
+                                "image": "/assets/images/fizics/fizics2.png",
+                                "task": "разработать макет открыток с российскими физиками, используя айдентику мероприятия",
+                                "solution": "изучить биографии российских и советских учёных. Было важно показать, что теоретические открытия не самоцель, наука призвана решать конкретные практические задачи. Так родилась идея написать тексты об открытиях на обороте и добавлять надпись «НАУКА=ТЕОРИЯ+ПРАКТИКА». Цитаты учёных были подобраны для трансляции ценностей об отношении к профессии, труду и обществу"
+                            },
+                            {
+                                "image": "/assets/images/fizics/fizics3.png",
+                                "task": "разработать карточки для игры «Технообмен» в айдентике бренда, но с указанными новыми цветами. Участники получали карточки в обмен на выполнение заданий",
+                                "solution": "создание легко читаемых макетов с указанием темы, года, ранжирования и категории по цвету"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "project4",
+                        "title": "Презентации",
+                        "description": "",
+                        "audience": "",
+                        "slides": [
+                            { "image": "/assets/images/presentations/0.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/1.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/2.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/3.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/4.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/5.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/6.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/7.png", "task": null, "solution": null },
+                            { "image": "/assets/images/presentations/8.png", "task": null, "solution": null }
+                        ]
+                    }
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                this.hidePreloader();
+                this.renderPortfolio();
+                this.setupEventListeners();
+                this.preloadImages();
+            }
+
+            hidePreloader() {
+                const preloader = document.getElementById('preloader');
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    // Убираем элемент из DOM после анимации
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 500);
+                }, 500);
+            }
+
+            renderPortfolio() {
+                const grid = document.getElementById('portfolio-grid');
+                
+                this.portfolioData.forEach((item, index) => {
+                    const card = this.createProjectCard(item, index);
+                    grid.appendChild(card);
+                });
+            }
+
+            createProjectCard(item, index) {
+                const card = document.createElement('button');
+                card.className = 'project-card';
+                card.setAttribute('role', 'gridcell');
+                card.setAttribute('aria-label', `Открыть проект ${item.alt}`);
+                card.onclick = () => this.openProject(item.id);
+                
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.alt;
+                img.loading = index < 2 ? 'eager' : 'lazy'; // Первые 2 изображения загружаем сразу
+                img.decoding = 'async';
+                
+                card.appendChild(img);
+                return card;
+            }
+
+            openProject(projectId) {
+                const project = this.projectsData.find(p => p.id === projectId);
+                if (!project) return;
+                
+                this.currentProject = project;
+                this.currentSlide = 0;
+                this.showModal(project);
+            }
+
+            showModal(project) {
+                // Заполняем данные
+                document.getElementById('modal-title').textContent = project.title;
+                document.getElementById('modal-description').textContent = project.description;
+                
+                const audienceEl = document.getElementById('modal-audience');
+                if (project.audience) {
+                    audienceEl.innerHTML = `<span>Целевая аудитория:</span> ${project.audience}`;
+                } else {
+                    audienceEl.innerHTML = '';
+                }
+                
+                // Создаем слайды
+                this.createSlides(project.slides);
+                
+                // Показываем модалку с современной анимацией
+                const modal = document.getElementById('project-modal');
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                
+                // Блокируем скролл
+                document.body.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+                
+                // Добавляем анимацию появления
+                requestAnimationFrame(() => {
+                    modal.classList.add('modal-enter');
+                });
+                
+                this.isModalOpen = true;
+                this.updateSlide();
+                
+                // Фокус на модальном окне для доступности
+                modal.focus();
+            }
+
+            createSlides(slides) {
+                const container = document.getElementById('slider-container');
+                container.innerHTML = '';
+                
+                slides.forEach((slide, index) => {
+                    const slideEl = document.createElement('div');
+                    slideEl.className = `slide ${index === 0 ? 'active' : ''}`;
+                    slideEl.setAttribute('data-index', index);
+                    slideEl.setAttribute('role', 'img');
+                    slideEl.setAttribute('aria-label', `Слайд ${index + 1} из ${slides.length}`);
+                    
+                    const img = document.createElement('img');
+                    img.src = slide.image;
+                    img.alt = `${this.currentProject.title} - Слайд ${index + 1}`;
+                    img.loading = index === 0 ? 'eager' : 'lazy';
+                    img.decoding = 'async';
+                    
+                    slideEl.appendChild(img);
+                    container.appendChild(slideEl);
+                });
+                
+                this.updateNavigationButtons();
+            }
+
+            closeModal() {
+                const modal = document.getElementById('project-modal');
+                
+                // Анимация закрытия
+                modal.classList.add('modal-exit');
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    modal.classList.remove('modal-enter', 'modal-exit');
+                    modal.setAttribute('aria-hidden', 'true');
+                    
+                    // Возвращаем скролл
+                    document.body.style.overflow = '';
+                    document.body.style.position = '';
+                    document.body.style.width = '';
+                    
+                    this.currentProject = null;
+                    this.isModalOpen = false;
+                }, 300);
+            }
+
+            navigateSlide(direction) {
+                if (!this.currentProject || this.isTransitioning) return;
+                
+                const slides = this.currentProject.slides;
+                const totalSlides = slides.length;
+                
+                this.isTransitioning = true;
+                
+                if (direction === 'next') {
+                    this.currentSlide = (this.currentSlide + 1) % totalSlides;
+                } else if (direction === 'prev') {
+                    this.currentSlide = (this.currentSlide - 1 + totalSlides) % totalSlides;
+                }
+                
+                this.updateSlide();
+                
+                // Сбрасываем флаг транзиции через некоторое время
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                }, 300);
+            }
+
+            updateSlide() {
+                if (!this.currentProject) return;
+                
+                // Обновляем активный слайд
+                const slides = document.querySelectorAll('.slide');
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+                
+                // Обновляем информацию о слайде
+                this.updateSlideInfo();
+                this.updateNavigationButtons();
+                
+                // Обновляем aria-live регион
+                const slideInfo = document.getElementById('slide-info');
+                slideInfo.setAttribute('aria-label', 
+                    `Слайд ${this.currentSlide + 1} из ${this.currentProject.slides.length}`);
+            }
+
+            updateSlideInfo() {
+                const slideData = this.currentProject.slides[this.currentSlide];
+                const infoContainer = document.getElementById('slide-info');
+                
+                let info = '';
+                if (slideData.task) {
+                    info += `<p><strong>Задача:</strong> ${slideData.task}</p>`;
+                }
+                if (slideData.solution) {
+                    info += `<p><strong>Решение:</strong> ${slideData.solution}</p>`;
+                }
+                
+                infoContainer.innerHTML = info;
+            }
+
+            updateNavigationButtons() {
+                if (!this.currentProject) return;
+                
+                const prevBtn = document.querySelector('.slider-prev');
+                const nextBtn = document.querySelector('.slider-next');
+                const totalSlides = this.currentProject.slides.length;
+                
+                // Для кольцевой навигации кнопки всегда активны если есть больше 1 слайда
+                const isDisabled = totalSlides <= 1;
+                
+                prevBtn.disabled = isDisabled;
+                nextBtn.disabled = isDisabled;
+                
+                prevBtn.setAttribute('aria-label', 
+                    `Предыдущий слайд (${this.currentSlide + 1} из ${totalSlides})`);
+                nextBtn.setAttribute('aria-label', 
+                    `Следующий слайд (${this.currentSlide + 1} из ${totalSlides})`);
+            }
+
+            preloadImages() {
+                // Предзагружаем изображения портфолио
+                this.portfolioData.forEach(item => {
+                    const img = new Image();
+                    img.src = item.image;
+                });
+            }
+
+            setupEventListeners() {
+                // Клавиатурная навигация
+                document.addEventListener('keydown', (e) => {
+                    if (this.isModalOpen) {
+                        switch(e.key) {
+                            case 'Escape':
+                                this.closeModal();
+                                break;
+                            case 'ArrowLeft':
+                                e.preventDefault();
+                                this.navigateSlide('prev');
+                                break;
+                            case 'ArrowRight':
+                                e.preventDefault();
+                                this.navigateSlide('next');
+                                break;
+                        }
+                    }
+                });
+
+                // Модальное окно
+                const modal = document.getElementById('project-modal');
+                const modalClose = document.querySelector('.modal-close');
+                const modalBackdrop = document.querySelector('.modal-backdrop');
+                const prevBtn = document.querySelector('.slider-prev');
+                const nextBtn = document.querySelector('.slider-next');
+
+                modalClose.onclick = () => this.closeModal();
+                modalBackdrop.onclick = () => this.closeModal();
+                prevBtn.onclick = () => this.navigateSlide('prev');
+                nextBtn.onclick = () => this.navigateSlide('next');
+
+                // Предотвращаем закрытие при клике на контент модалки
+                document.querySelector('.modal-content').onclick = (e) => {
+                    e.stopPropagation();
+                };
+
+                // Поддержка touch-жестов для мобильных устройств
+                this.setupTouchGestures();
+            }
+
+            setupTouchGestures() {
+                let startX = 0;
+                let endX = 0;
+                
+                const sliderContainer = document.getElementById('slider-container');
+                
+                sliderContainer.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+                
+                sliderContainer.addEventListener('touchend', (e) => {
+                    endX = e.changedTouches[0].clientX;
+                    this.handleSwipe();
+                }, { passive: true });
+            }
+
+            handleSwipe() {
+                const threshold = 50; // Минимальное расстояние для свайпа
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        // Свайп влево - следующий слайд
+                        this.navigateSlide('next');
+                    } else {
+                        // Свайп вправо - предыдущий слайд
+                        this.navigateSlide('prev');
+                    }
+                }
+            }
+        }
+
+        // Инициализация приложения
+        document.addEventListener('DOMContentLoaded', () => {
+            new PortfolioApp();
+        });
+    </script>
 </body>
 </html>
