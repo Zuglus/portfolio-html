@@ -1,4 +1,3 @@
-// .htmlvalidate.json
 {
   "extends": ["html-validate:recommended"],
   "rules": {
