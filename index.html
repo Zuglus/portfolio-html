@@ -10,23 +10,17 @@
     <link rel="preload" href="/assets/fonts/MV-SKIFER.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="/assets/fonts/Onest-Regular.ttf" as="font" type="font/ttf" crossorigin>
     
-    <style>
-        /* ============ ТОЧНАЯ СИСТЕМА ИЗ RUST ПРОЕКТА ============ */
-        
-        /* Критически важная настройка масштабирования из оригинала */
+    <style>        
         :root {
             font-size: clamp(4.27px, calc(100vw / 75), 16px);
             
-            /* Точные цвета из Tailwind config */
             --color-primary: #04061B;
             --color-secondary: #3624A6;
             --color-white: #FFFFFF;
             
-            /* Точные шрифты */
             --font-mv-skifer: 'MV-SKIFER', sans-serif;
             --font-onest: 'Onest', sans-serif;
             
-            /* Motion System из Tailwind config */
             --motion-duration-short1: 50ms;
             --motion-duration-short2: 100ms;
             --motion-duration-short3: 150ms;
@@ -47,7 +41,6 @@
             --motion-easing-legacy: cubic-bezier(0.4, 0.0, 0.2, 1);
         }
         
-        /* Font Face из style/main.scss */
         @font-face {
             font-family: 'MV-SKIFER';
             src: url('/assets/fonts/MV-SKIFER.otf') format('opentype');
@@ -111,7 +104,7 @@
             overflow-x: hidden;
         }
         
-        /* ============ HEADER (точные размеры из header.rs) ============ */
+        /* ============ HEADER ============ */
         .header {
             position: relative;
             margin: 0 auto;
@@ -172,7 +165,7 @@
             letter-spacing: 0.05em;
         }
         
-        /* ============ PORTFOLIO SECTION (точные размеры из portfolio_section.rs) ============ */
+        /* ============ PORTFOLIO SECTION ============ */
         .portfolio {
             position: relative;
             margin: 0 auto;
@@ -224,7 +217,7 @@
             max-width: 70.65625rem;
         }
         
-        /* ============ PROJECT CARDS (точные стили из project_card.rs) ============ */
+        /* ============ PROJECT CARDS ============ */
         .project-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 1.875rem;
@@ -258,7 +251,7 @@
             transform: scale(1.05);
         }
         
-        /* ============ FOOTER (точные размеры из footer.rs) ============ */
+        /* ============ FOOTER ============ */
         .footer {
             position: relative;
             margin-top: 12.375rem;
@@ -314,7 +307,7 @@
             background: linear-gradient(to top, #1C1257, #312098);
         }
         
-        /* ============ MODAL SYSTEM (точные размеры из modal.rs) ============ */
+        /* ============ MODAL SYSTEM ============ */
         .modal {
             position: fixed;
             inset: 0;
@@ -341,7 +334,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1.875rem;
             width: 100%;
-            max-width: 7xl;
+            max-width: 1280px;
             margin: 1rem;
             overflow: hidden;
             z-index: 1051;
@@ -352,7 +345,6 @@
             height: 90vh;
             overflow-y: auto;
             
-            /* Custom scrollbar точно как в оригинале */
             scrollbar-width: thin;
             scrollbar-color: #3624A6 transparent;
         }
@@ -362,7 +354,7 @@
         }
         
         .modal-scrollable::-webkit-scrollbar-track {
-            background: #3624A6;
+            background: transparent;
         }
         
         .modal-scrollable::-webkit-scrollbar-thumb {
@@ -388,8 +380,8 @@
             z-index: 50;
             transition: all 300ms ease-in-out;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            width: 3rem;
-            height: 3rem;
+            width: 4rem;
+            height: 4rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -407,12 +399,14 @@
         
         .modal-header {
             margin-bottom: 2rem;
+            margin-bottom: 2.8125rem;
         }
         
         .modal-title {
             font-family: var(--font-mv-skifer);
             font-size: 4.6875rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
+            line-height: 1.2;
         }
         
         .modal-subtitle {
@@ -420,15 +414,19 @@
             font-weight: 200;
             font-size: 3.28125rem;
             line-height: 1.4;
+            margin-top: 0.5rem;
         }
         
         .modal-audience {
             font-family: var(--font-onest);
             font-size: 3.28125rem;
+            line-height: 1.4;
+            opacity: 0.8;
         }
         
         .modal-audience span {
             font-weight: 600;
+            opacity: 1;
         }
         
         /* ============ SLIDER ============ */
@@ -442,13 +440,17 @@
             position: relative;
             min-height: 400px;
             margin-bottom: 1.5rem;
+            overflow: hidden;
+            border-radius: 0.5rem;
         }
         
-        .slider-container {
+        .image-container {
             position: relative;
             width: 100%;
-            height: 100%;
             min-height: 400px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0.5rem;
+            overflow: hidden;
         }
         
         .slide {
@@ -469,56 +471,149 @@
         }
         
         .slide img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: auto;
             object-fit: contain;
+            max-height: 70vh;
             border-radius: 0.5rem;
         }
         
+        /* Navigation controls */
         .slider-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+            z-index: 10;
         }
         
         .slider-btn {
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 50%;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            width: 5rem;
-            height: 5rem;
-            background: transparent;
-            color: var(--color-white);
-            cursor: pointer;
-            transition: all 300ms cubic-bezier(0.05, 0.7, 0.1, 1);
+            padding: 0;
+            transition: all 150ms ease;
         }
         
         .slider-btn:hover {
-            color: #3624A6;
-            border-color: #3624A6;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .slider-btn:active {
+            transform: scale(0.95);
         }
         
         .slider-btn:disabled {
-            opacity: 0.38;
+            opacity: 0.3;
             cursor: not-allowed;
         }
         
+        .slider-btn:disabled:hover {
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.25);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .slider-btn svg {
+            width: 1rem;
+            height: 1rem;
+            stroke-width: 1.5;
+        }
+        
+        /* Кнопка скриншота */
+        .screenshot-btn {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: all 150ms ease;
+        }
+        
+        .screenshot-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .screenshot-btn svg {
+            width: 1rem;
+            height: 1rem;
+            stroke-width: 1.5;
+        }
+        
+        /* Кнопка меню */
+        .menu-btn {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: all 150ms ease;
+        }
+        
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .menu-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        /* Slide info */
         .slide-info {
-            padding: 2rem;
+            padding: 0 2rem 2rem;
             font-family: var(--font-onest);
-            font-size: 1.25rem;
+            font-size: 3.28125rem;
+            line-height: 1.4;
         }
         
         .slide-info p {
             margin-bottom: 1rem;
         }
         
+        .slide-info p:last-child {
+            margin-bottom: 0;
+        }
+        
         .slide-info strong {
             font-weight: 600;
+        }
+        
+        .slide-info span {
+            opacity: 0.8;
         }
         
         /* ============ RESPONSIVE DESIGN ============ */
@@ -611,14 +706,38 @@
             
             .modal-close {
                 padding: 0.5rem;
-                width: 1.5rem;
-                height: 1.5rem;
+                width: 3rem;
+                height: 3rem;
             }
             
             .slider-btn {
-                font-size: 3rem;
-                width: 3rem;
-                height: 3rem;
+                width: 2rem;
+                height: 2rem;
+            }
+            
+            .slider-btn svg {
+                width: 0.875rem;
+                height: 0.875rem;
+            }
+            
+            .screenshot-btn {
+                width: 2rem;
+                height: 2rem;
+            }
+            
+            .screenshot-btn svg {
+                width: 0.875rem;
+                height: 0.875rem;
+            }
+            
+            .menu-btn {
+                width: 2rem;
+                height: 2rem;
+            }
+            
+            .menu-btn svg {
+                width: 0.875rem;
+                height: 0.875rem;
             }
             
             .slide-info {
@@ -631,6 +750,47 @@
             overflow: hidden;
             position: fixed;
             width: 100%;
+        }
+        
+        /* Skeleton loader */
+        .skeleton {
+            position: relative;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .skeleton::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.04) 50%,
+                transparent 100%
+            );
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite cubic-bezier(0.2, 0.0, 0, 1);
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Loading spinner */
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Utility classes */
@@ -716,14 +876,23 @@
                     
                     <div class="slider">
                         <div class="slider-viewport">
-                            <div id="slider-container" class="slider-container">
-                                <!-- Слайды -->
+                            <div class="image-container" id="slider-container">
+                                <!-- Слайды будут добавлены динамически -->
                             </div>
-                        </div>
-                        
-                        <div class="slider-controls">
-                            <button class="slider-btn" id="prev-btn" aria-label="Предыдущий слайд">←</button>
-                            <button class="slider-btn" id="next-btn" aria-label="Следующий слайд">→</button>
+                            
+                            <!-- Кнопки внутри viewport -->
+                            <div class="slider-controls">
+                                <button class="slider-btn" id="prev-btn" aria-label="Предыдущий слайд">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <button class="slider-btn" id="next-btn" aria-label="Следующий слайд">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         
                         <div id="slide-info" class="slide-info">
@@ -742,7 +911,7 @@
     </div>
 
     <script>
-        // ============ ТОЧНАЯ РЕАЛИЗАЦИЯ ЛОГИКИ ИЗ RUST ПРОЕКТА ============
+        // ============ ЛОГИКА ============
         
         class PortfolioApp {
             constructor() {
@@ -751,7 +920,6 @@
                 this.isModalOpen = false;
                 this.isTransitioning = false;
                 
-                // Точные данные из Rust проекта
                 this.portfolioData = [
                     {
                         id: "project1",
@@ -885,6 +1053,7 @@
             init() {
                 this.renderPortfolio();
                 this.bindEvents();
+                this.prefetchImages();
             }
 
             renderPortfolio() {
@@ -906,6 +1075,7 @@
                 img.src = item.image;
                 img.alt = item.alt;
                 img.className = 'project-card-img';
+                img.loading = 'lazy';
                 
                 card.appendChild(img);
                 return card;
@@ -927,14 +1097,22 @@
                 const project = this.currentProject;
                 
                 // Заполняем данные модального окна
-                document.getElementById('modal-title').textContent = project.title;
-                document.getElementById('modal-description').textContent = project.description;
+                document.getElementById('modal-title').textContent = project.title || '';
+                
+                const descriptionEl = document.getElementById('modal-description');
+                if (project.description) {
+                    descriptionEl.textContent = project.description;
+                    descriptionEl.style.display = 'block';
+                } else {
+                    descriptionEl.style.display = 'none';
+                }
                 
                 const audienceEl = document.getElementById('modal-audience');
                 if (project.audience) {
                     audienceEl.innerHTML = `<span>Целевая аудитория:</span> ${project.audience}`;
+                    audienceEl.style.display = 'block';
                 } else {
-                    audienceEl.innerHTML = '';
+                    audienceEl.style.display = 'none';
                 }
                 
                 // Создаем слайды
@@ -946,6 +1124,9 @@
                 
                 this.isModalOpen = true;
                 this.updateSlide();
+                
+                // Прелоадим следующий слайд
+                this.preloadAdjacentSlides();
             }
 
             createSlides() {
@@ -962,6 +1143,7 @@
                     const img = document.createElement('img');
                     img.src = slide.image;
                     img.alt = `${this.currentProject.title} - Слайд ${index + 1}`;
+                    img.loading = index === 0 ? 'eager' : 'lazy';
                     
                     slideEl.appendChild(img);
                     container.appendChild(slideEl);
@@ -997,6 +1179,7 @@
                 }
                 
                 this.updateSlide();
+                this.preloadAdjacentSlides();
                 
                 setTimeout(() => {
                     this.isTransitioning = false;
@@ -1023,10 +1206,10 @@
                 
                 let info = '';
                 if (slideData.task) {
-                    info += `<p><strong>Задача:</strong> ${slideData.task}</p>`;
+                    info += `<p><strong>Задача:</strong> <span>${slideData.task}</span></p>`;
                 }
                 if (slideData.solution) {
-                    info += `<p><strong>Решение:</strong> ${slideData.solution}</p>`;
+                    info += `<p><strong>Решение:</strong> <span>${slideData.solution}</span></p>`;
                 }
                 
                 infoContainer.innerHTML = info;
@@ -1043,6 +1226,38 @@
                 
                 prevBtn.disabled = isDisabled;
                 nextBtn.disabled = isDisabled;
+            }
+
+            preloadAdjacentSlides() {
+                if (!this.currentProject) return;
+                
+                const slides = this.currentProject.slides;
+                const totalSlides = slides.length;
+                
+                const nextIndex = (this.currentSlide + 1) % totalSlides;
+                const prevIndex = (this.currentSlide - 1 + totalSlides) % totalSlides;
+                
+                // Прелоад следующего и предыдущего слайдов
+                [nextIndex, prevIndex].forEach(index => {
+                    if (slides[index]) {
+                        const link = document.createElement('link');
+                        link.rel = 'prefetch';
+                        link.href = slides[index].image;
+                        document.head.appendChild(link);
+                    }
+                });
+            }
+
+            prefetchImages() {
+                // Прелоадим первые изображения проектов
+                this.portfolioData.forEach((item, index) => {
+                    if (index < 2) { // Прелоадим первые 2 проекта
+                        const link = document.createElement('link');
+                        link.rel = 'prefetch';
+                        link.href = item.image;
+                        document.head.appendChild(link);
+                    }
+                });
             }
 
             bindEvents() {
@@ -1079,6 +1294,30 @@
                 // Prevent modal close when clicking content
                 document.querySelector('.modal-content').onclick = (e) => {
                     e.stopPropagation();
+                };
+                
+                // Touch events для мобильных устройств
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                const sliderContainer = document.getElementById('slider-container');
+                
+                sliderContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                
+                sliderContainer.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    this.handleSwipe();
+                });
+                
+                this.handleSwipe = () => {
+                    if (touchEndX < touchStartX - 50) {
+                        this.navigateSlide('next');
+                    }
+                    if (touchEndX > touchStartX + 50) {
+                        this.navigateSlide('prev');
+                    }
                 };
             }
         }
